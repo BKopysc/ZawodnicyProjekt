@@ -8,9 +8,9 @@ namespace Zawodnicy.Core.Repository
 {
     public interface ISkiJumpersRepository
     {
-        Task<SkiJumper> UpdateAsync(SkiJumper sj, int id);
-        Task<SkiJumper> AddSync(SkiJumper sj);
-        Task<bool> DelAsync(int id);
+        Task UpdateAsync(SkiJumper sj, int id);
+        Task<SkiJumper> AddSync (SkiJumper sj);
+        Task DelAsync(int id);
         Task<SkiJumper> GetAsync(int id);
         Task<IEnumerable<SkiJumper>> BrowseAllAsync();
 

@@ -6,7 +6,7 @@ namespace Zawodnicy.Core.Domain
 {
     public class SkiJumper
     {
-        public Coach Couch { get; set; }
+        public Coach Coach { get; set; }
         public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }

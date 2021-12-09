@@ -15,9 +15,9 @@ namespace Zawodnicy.Infrastructure.Services
 
         Task<SkiJumperDTO> AddSkiJumper(CreateSkiJumper skiJumper);
 
-        Task<SkiJumperDTO> UpdateSkiJumper(UpdateSkiJumper skiJumper, int id);
+        Task UpdateSkiJumper(UpdateSkiJumper skiJumper, int id);
 
-        Task<bool> DeleteSkiJumper(int id);
+        Task DeleteSkiJumper(int id);
 
         Task<IEnumerable<SkiJumperDTO>> BrowseWithFilter(string name, string country);
     }

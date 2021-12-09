@@ -9,7 +9,7 @@ namespace Zawodnicy.Infrastructure.Repositories
 {
     class CouchesRepository : ICoachesRepository
     {
-        public Task AddSync(Coach c)
+        public Task AddAsync(Coach c)
         {
             throw new NotImplementedException();
         }

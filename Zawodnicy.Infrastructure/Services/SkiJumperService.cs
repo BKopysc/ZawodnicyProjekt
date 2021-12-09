@@ -50,11 +50,12 @@ namespace Zawodnicy.Infrastructure.Services
 
             var z = await _skiJumpersRepository.AddSync(sj);
 
-            if(z == null)
+            if (z == null)
             {
                 return null;
             }
 
+            Console.WriteLine(z.Id);
             return MakeDTO(z);
 
         }
@@ -87,7 +88,7 @@ namespace Zawodnicy.Infrastructure.Services
 
         }
 
-        public async Task<SkiJumperDTO> UpdateSkiJumper(UpdateSkiJumper USkiJumper, int id)
+        public async Task UpdateSkiJumper(UpdateSkiJumper USkiJumper, int id)
         {
             SkiJumper sj = new SkiJumper()
             {
@@ -100,23 +101,23 @@ namespace Zawodnicy.Infrastructure.Services
                 DateBirth = USkiJumper.DateBirth
             };
 
-            var z = await _skiJumpersRepository.UpdateAsync(sj, id);
+            await _skiJumpersRepository.UpdateAsync(sj, id);
 
 
-            if (z == null)
-            {
-                return null;
-            }
+            //if (z == null)
+            //{
+            //    return null;
+            //}
 
-            return MakeDTO(z);
+            //return MakeDTO(z);
 
         }
 
-        public async Task<bool> DeleteSkiJumper(int id)
+        public async Task DeleteSkiJumper(int id)
         {
-            var z = await _skiJumpersRepository.DelAsync(id);
+            await _skiJumpersRepository.DelAsync(id);
 
-            return(z);
+            //return(z);
         }
 
         public async Task<IEnumerable<SkiJumperDTO>> BrowseWithFilter(string name, string country)

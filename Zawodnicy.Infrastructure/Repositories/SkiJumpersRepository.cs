@@ -14,49 +14,29 @@ namespace Zawodnicy.Infrastructure.Repositories
     {
         private AppDbContext _appDbContext;
 
-        /*
-            new SkiJumper()
-            {
-                Id = 1,
-                Name = "Martin",
-                Surname = "Sommer",
-                Country = "Germany",
-                Height = 180,
-                Weight = 70,
-                DateBirth = new DateTime(1998, 10, 1)
-            } 
-        */
         public SkiJumpersRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
 
         }
-        public async Task AddSync(SkiJumper sj)
+        public async Task<SkiJumper> AddSync(SkiJumper sj)
         {
-
-            //int index = _skiJumpersMock.FindIndex(item => item.Id == sj.Id); //Zmienić na DateBase
-            //if (index >= 0 || sj.Id < 0)
-            //{
-            //    return null;
-            //}
-            //else
-            //{
-            //    _skiJumpersMock.Add(sj);
-            //    return await Task.FromResult(_skiJumpersMock.Find(x => x == sj));
-            //}
 
             try
             {
                 _appDbContext.SkiJumper.Add(sj);
                 _appDbContext.SaveChanges();
-                await Task.CompletedTask;
+
+                Console.WriteLine(sj.Id);
+
+                //Task.CompletedTask;
                 return await Task.FromResult(_appDbContext.SkiJumper.FirstOrDefault(x => x.Id == sj.Id));
             }
             catch (Exception ex)
             {
                 await Task.FromException(ex);
                 return null;
-            } //Mozna nic nie zwracać
+            }
         }
 
         public async Task<IEnumerable<SkiJumper>> BrowseAllAsync()
@@ -66,49 +46,21 @@ namespace Zawodnicy.Infrastructure.Repositories
 
         public async Task<IEnumerable<SkiJumper>> BrowseWithFilterAsync(string name, string country)
         {
-            throw new NotImplementedException();
-            //List<SkiJumper> filteredList = new List<SkiJumper>();
-            //foreach (SkiJumper skiJumper in _skiJumpersMock)
-            //{
-            //    if(skiJumper.Name == name && skiJumper.Country == country)
-            //    {
-            //        filteredList.Add(skiJumper);
-            //    }
-            //}
-            //if(filteredList.Count > 0)
-            //{
-            //    return await Task.FromResult(filteredList);
-            //}
-
-            //return null;
-
-            // var s = _skiJumperMock.Where(x=> x.Country.Contains(country) || x.Name.Contains(name)).AsEnumerable();
+            var s = _appDbContext.SkiJumper.Where(x => x.Name == name || x.Country == country).AsEnumerable();
+            return await Task.FromResult(s);
         }
 
-        public async Task<bool> DelAsync(int id)
+        public async Task DelAsync(int id)
         {
             try
             {
                 _appDbContext.Remove(_appDbContext.SkiJumper.FirstOrDefault(x => x.Id == id));
                 _appDbContext.SaveChanges();
-                return true;
             }
             catch (Exception ex)
             {
                 await Task.FromException(ex);
-                return false;
-            } //Mozna nic nie zwracać
-
-            //int index = _skiJumpersMock.FindIndex(item => item.Id == id);
-            //if (index >= 0)
-            //{
-            //    _skiJumpersMock.RemoveAt(index);
-            //    return await Task.FromResult(true);
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            } 
         }
 
         public async Task<SkiJumper> GetAsync(int id)
@@ -123,25 +75,16 @@ namespace Zawodnicy.Infrastructure.Repositories
                 await Task.FromException(ex);
                 return null;
             }
-            //int index = _skiJumpersMock.FindIndex(item => item.Id == id);
-            //if (index >= 0)
-            //{
-            //    return await Task.FromResult(_skiJumpersMock.FirstOrDefault(x => x.Id == id));
-            //}
-            //else
-            //{
-            //    return null;
-            //}
         }
 
-        public async Task<SkiJumper> UpdateAsync(SkiJumper sj, int id)
+        public async Task UpdateAsync(SkiJumper sj, int id)
         {
 
             try {
                 var z = _appDbContext.SkiJumper.FirstOrDefault(x => x.Id == sj.Id);
 
                 z.Name = sj.Name;
-                z.Surname = sj.Name;
+                z.Surname = sj.Surname;
                 z.Id = sj.Id;
                 z.Height = sj.Height;
                 z.Weight = sj.Weight;
@@ -149,23 +92,12 @@ namespace Zawodnicy.Infrastructure.Repositories
                 z.DateBirth = sj.DateBirth;
 
                 _appDbContext.SaveChanges();
-
-                return await Task.FromResult(_appDbContext.SkiJumper.FirstOrDefault(x => x.Id == sj.Id));
             }
             catch (Exception ex)
             {
                 await Task.FromException(ex);
-                return null;
-            } //Mozna nic nie zwracać
+            } 
 
-            //int index = _skiJumpersMock.FindIndex(item => item.Id == id);
-            //if(index >= 0)
-            //{
-            //    _skiJumpersMock[index] = sj;
-            //    return await Task.FromResult(_skiJumpersMock.Find(x => x == sj));
-            //}
-
-            //return null;
         }
 
     }

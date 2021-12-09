@@ -55,19 +55,19 @@ namespace Zawodnicy.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSkiJumper([FromBody] UpdateSkiJumper skiJumper, int id)
+        public async Task UpdateSkiJumper([FromBody] UpdateSkiJumper skiJumper, int id)
         {
             Console.WriteLine($"Put: id {id}");
-            SkiJumperDTO z = await _skiJumperService.UpdateSkiJumper(skiJumper, id);
-            return Json(z);
+            await _skiJumperService.UpdateSkiJumper(skiJumper, id);
+            //return Json(z);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSkiJumper(int id)
+        public async Task DeleteSkiJumper(int id)
         {
             Console.WriteLine($"Delete: id {id}");
-            bool z = await _skiJumperService.DeleteSkiJumper(id);
-            return Json(z);
+            await _skiJumperService.DeleteSkiJumper(id);
+            //return Json(z);
         }
 
     }
