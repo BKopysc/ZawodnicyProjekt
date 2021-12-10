@@ -81,7 +81,7 @@ namespace Zawodnicy.Infrastructure.Repositories
         {
 
             try {
-                var z = _appDbContext.SkiJumper.FirstOrDefault(x => x.Id == sj.Id);
+                var z = _appDbContext.SkiJumper.FirstOrDefault(x => x.Id == id);
 
                 z.Name = sj.Name;
                 z.Surname = sj.Surname;

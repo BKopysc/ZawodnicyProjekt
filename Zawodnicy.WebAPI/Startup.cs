@@ -34,6 +34,9 @@ namespace Zawodnicy.WebAPI
             services.AddScoped<ISkiJumpersRepository, SkiJumpersRepository>();
             services.AddScoped<ISkiJumperService, SkiJumperService>();
 
+            services.AddScoped<ICoachesRepository, CoachesRepository>();
+            services.AddScoped<ICoachService, CoachService>();
+
             
 
             services.AddDbContext<AppDbContext>(

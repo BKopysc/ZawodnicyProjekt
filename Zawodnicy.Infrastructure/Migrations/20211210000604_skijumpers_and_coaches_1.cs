@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Zawodnicy.Infrastructure.Migrations
 {
-    public partial class startowa : Migration
+    public partial class skijumpers_and_coaches_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace Zawodnicy.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CouchId = table.Column<int>(type: "int", nullable: true),
+                    CoachId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -40,17 +40,17 @@ namespace Zawodnicy.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_SkiJumper", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SkiJumper_Coach_CouchId",
-                        column: x => x.CouchId,
+                        name: "FK_SkiJumper_Coach_CoachId",
+                        column: x => x.CoachId,
                         principalTable: "Coach",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SkiJumper_CouchId",
+                name: "IX_SkiJumper_CoachId",
                 table: "SkiJumper",
-                column: "CouchId");
+                column: "CoachId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

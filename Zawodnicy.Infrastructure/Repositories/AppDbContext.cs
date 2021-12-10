@@ -15,6 +15,6 @@ namespace Zawodnicy.Infrastructure.Repositories
 
         public DbSet<SkiJumper> SkiJumper { get; set; } //dla pozostalych klas to samo
 
-        //public DbSet<Coach> Coach { get; set; }
+        public DbSet<Coach> Coach { get; set; }
     }
 }

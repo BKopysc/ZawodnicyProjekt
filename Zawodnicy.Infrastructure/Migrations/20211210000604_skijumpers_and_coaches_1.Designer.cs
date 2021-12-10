@@ -10,8 +10,8 @@ using Zawodnicy.Infrastructure.Repositories;
 namespace Zawodnicy.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211209222850_startowa_2")]
-    partial class startowa_2
+    [Migration("20211210000604_skijumpers_and_coaches_1")]
+    partial class skijumpers_and_coaches_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

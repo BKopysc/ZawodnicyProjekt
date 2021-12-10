@@ -8,9 +8,9 @@ namespace Zawodnicy.Core.Repository
 {
     public interface ICoachesRepository
     {
-        Task UpdateAsync(Coach c);
+        Task UpdateAsync(Coach c, int id);
         Task<Coach> AddAsync(Coach c);
-        Task DelAsync(Coach c);
+        Task DelAsync(int id);
         Task<Coach> GetAsync(int id);
         Task<IEnumerable<Coach>> BrowseAllAsync();
     }
