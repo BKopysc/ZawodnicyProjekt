@@ -6,6 +6,7 @@ namespace Zawodnicy.Infrastructure.DTO
 {
     public class SkiJumperDTO
     {
+        //public int CoachId { get; set; }
         public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }

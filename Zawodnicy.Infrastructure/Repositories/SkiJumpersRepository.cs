@@ -56,6 +56,7 @@ namespace Zawodnicy.Infrastructure.Repositories
             {
                 _appDbContext.Remove(_appDbContext.SkiJumper.FirstOrDefault(x => x.Id == id));
                 _appDbContext.SaveChanges();
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -92,6 +93,8 @@ namespace Zawodnicy.Infrastructure.Repositories
                 z.DateBirth = sj.DateBirth;
 
                 _appDbContext.SaveChanges();
+
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {

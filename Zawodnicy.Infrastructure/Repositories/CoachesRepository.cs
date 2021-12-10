@@ -43,6 +43,7 @@ namespace Zawodnicy.Infrastructure.Repositories
             {
                 _appDbContext.Remove(_appDbContext.Coach.FirstOrDefault(x => x.Id == id));
                 _appDbContext.SaveChanges();
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
@@ -77,6 +78,7 @@ namespace Zawodnicy.Infrastructure.Repositories
                 z.DateBirth = c.DateBirth;
 
                 _appDbContext.SaveChanges();
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
