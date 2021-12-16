@@ -11,12 +11,12 @@ using Zawodnicy.WebApp.Models;
 
 namespace Zawodnicy.WebApp.Controllers
 {
-
-    public class SkiJumperController : Controller
+    public class CoachController : Controller
     {
+
         public IConfiguration Configuration;
 
-        public SkiJumperController(IConfiguration configuration)
+        public CoachController(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -36,32 +36,31 @@ namespace Zawodnicy.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //string _restpath = "http://localhost:5000/skijumper";
             string _restpath = GetHostUrl().Content + CN();
-            List<SkiJumperVM> skiJumpersList = new List<SkiJumperVM>();
+            List<CoachVM> coachesList = new List<CoachVM>();
 
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(_restpath))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    skiJumpersList = JsonConvert.DeserializeObject<List<SkiJumperVM>>(apiResponse);
+                    coachesList = JsonConvert.DeserializeObject<List<CoachVM>>(apiResponse);
                 }
             }
-            return View(skiJumpersList);
+            return View(coachesList);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             string _restpath = GetHostUrl().Content + CN();
-            SkiJumperVM s = new SkiJumperVM();
+            CoachVM s = new CoachVM();
 
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{_restpath}/{id}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    s = JsonConvert.DeserializeObject<SkiJumperVM>(apiResponse);
+                    s = JsonConvert.DeserializeObject<CoachVM>(apiResponse);
                 }
             }
             return View(s);
@@ -69,23 +68,23 @@ namespace Zawodnicy.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SkiJumperVM s) //strongly type view
+        public async Task<IActionResult> Edit(CoachVM c) 
         {
             string _restpath = GetHostUrl().Content + CN();
 
-            SkiJumperVM sjResult = new SkiJumperVM();
+            CoachVM cResult = new CoachVM();
 
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    string jsonString = System.Text.Json.JsonSerializer.Serialize(s);
+                    string jsonString = System.Text.Json.JsonSerializer.Serialize(c);
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                    using (var response = await httpClient.PutAsync($"{_restpath}/{s.Id}", content))
+                    using (var response = await httpClient.PutAsync($"{_restpath}/{c.Id}", content))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync(); //mozna zwrocic caly obiekt ktory zostal zedytowany
-                        sjResult = JsonConvert.DeserializeObject<SkiJumperVM>(apiResponse);
+                        string apiResponse = await response.Content.ReadAsStringAsync(); 
+                        cResult = JsonConvert.DeserializeObject<CoachVM>(apiResponse);
                     }
                 }
             }
@@ -99,35 +98,32 @@ namespace Zawodnicy.WebApp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             string _restpath = GetHostUrl().Content + CN();
-            SkiJumperVM s = new SkiJumperVM();
+            CoachVM c = new CoachVM();
 
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{_restpath}/{id}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    s = JsonConvert.DeserializeObject<SkiJumperVM>(apiResponse);
+                    c = JsonConvert.DeserializeObject<CoachVM>(apiResponse);
                 }
             }
-            return View(s);
+            return View(c);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(SkiJumperVM s) //strongly type view
+        public async Task<IActionResult> Delete(SkiJumperVM s) 
         {
             string _restpath = GetHostUrl().Content + CN();
-
-            SkiJumperVM sjResult = new SkiJumperVM();
 
             try
             {
                 using (var httpClient = new HttpClient())
                 {
 
-
                     using (var response = await httpClient.DeleteAsync($"{_restpath}/{s.Id}"))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync(); 
+                        string apiResponse = await response.Content.ReadAsStringAsync();
                     }
                 }
             }
@@ -145,23 +141,23 @@ namespace Zawodnicy.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SkiJumperVM s) //strongly type view
+        public async Task<IActionResult> Create(CoachVM c) 
         {
             string _restpath = GetHostUrl().Content + CN();
 
-            SkiJumperVM sjResult = new SkiJumperVM();
+            CoachVM cResult = new CoachVM();
 
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    string jsonString = System.Text.Json.JsonSerializer.Serialize(s);
+                    string jsonString = System.Text.Json.JsonSerializer.Serialize(c);
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                     using (var response = await httpClient.PostAsync($"{_restpath}/", content))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync(); //mozna zwrocic caly obiekt ktory zostal zedytowany
-                        sjResult = JsonConvert.DeserializeObject<SkiJumperVM>(apiResponse);
+                        string apiResponse = await response.Content.ReadAsStringAsync(); 
+                        cResult = JsonConvert.DeserializeObject<CoachVM>(apiResponse);
                     }
                 }
             }
@@ -172,9 +168,5 @@ namespace Zawodnicy.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
     }
-
-
 }
