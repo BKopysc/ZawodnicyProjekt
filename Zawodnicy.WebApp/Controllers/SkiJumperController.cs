@@ -123,8 +123,6 @@ namespace Zawodnicy.WebApp.Controllers
             {
                 using (var httpClient = new HttpClient())
                 {
-
-
                     using (var response = await httpClient.DeleteAsync($"{_restpath}/{s.Id}"))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync(); 
