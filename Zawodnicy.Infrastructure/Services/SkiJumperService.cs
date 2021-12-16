@@ -104,20 +104,12 @@ namespace Zawodnicy.Infrastructure.Services
             await _skiJumpersRepository.UpdateAsync(sj, id);
 
 
-            //if (z == null)
-            //{
-            //    return null;
-            //}
-
-            //return MakeDTO(z);
-
         }
 
         public async Task DeleteSkiJumper(int id)
         {
             await _skiJumpersRepository.DelAsync(id);
 
-            //return(z);
         }
 
         public async Task<IEnumerable<SkiJumperDTO>> BrowseWithFilter(string name, string country)
