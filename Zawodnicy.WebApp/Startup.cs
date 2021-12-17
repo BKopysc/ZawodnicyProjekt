@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,6 +42,11 @@ namespace Zawodnicy.WebApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            CultureInfo customCulture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+            customCulture.NumberFormat.NumberDecimalSeparator = ".";
+            CultureInfo.DefaultThreadCurrentCulture = customCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = customCulture;
 
             app.UseRouting();
 
