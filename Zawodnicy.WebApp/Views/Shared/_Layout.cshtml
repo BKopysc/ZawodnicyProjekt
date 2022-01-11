@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,9 +21,9 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                        @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -30,7 +33,61 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="Index">Coaches</a>
                         </li>
+                        @*Tajne dla roli 'wazny' lub 'zarzadca'*@
+                        @{
+                            if (User.IsInRole("zarzadca") || User.IsInRole("wazny"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Secret" asp-action="Index">*Materiały</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-link text-dark">
+                                    <span style="color:darkgray">*Materiały</span>
+                                </li>
+                            }
+                        }
 
+                        @*Panel administracyjny TYLKO dla roli "zarzadca"*@
+                        @{
+                            if (User.IsInRole("zarzadca"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">**Panel Administracyjny</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-link text-dark">
+                                    <span style="color:darkgrey">**Panel administracyjny</span>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse order-3">
+                    <ul class="navbar-nav ml-auto">
+                        @{ 
+                            if (SignInManager.IsSignedIn(User))
+                            {
+                        <li class="nav-item">
+                            Witaj @User.Identity.Name
+                        </li>
+                        <li class="nav-item">
+                            Wyloguj
+                        </li>
+                            }
+                            else
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Zarejestruj</a>
+                        </li>
+                                }
+                            }
                     </ul>
                 </div>
             </div>

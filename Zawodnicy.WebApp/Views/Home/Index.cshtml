@@ -6,3 +6,13 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (TempData["RegisterMessage"] != null)
+{
+    @if (TempData["RegisterMessage"].ToString().Equals("Success"))
+    {
+<div class="text-center">
+    <h2 class="display-4" style="color:forestgreen">Pomyślnie zarejestrowano!</h2>
+</div>
+    }
+}
