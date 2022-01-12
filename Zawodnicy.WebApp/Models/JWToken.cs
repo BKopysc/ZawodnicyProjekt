@@ -21,8 +21,8 @@ namespace Zawodnicy.WebApp.Models
         {
             Configuration = configuration;
 
-            TokenUrl = "http://localhost:5000";
-            SecretKey = "TajneHaslo12341234";
+            TokenUrl = "http://localhost:5001";
+            SecretKey = "SuperTajneHaslo111222";
             TokenString = GenerateJSONWebToken();
         }
 

@@ -10,7 +10,7 @@ using Zawodnicy.Infrastructure.Services;
 
 namespace Zawodnicy.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("[Controller]")]
 
     public class CoachController : Controller

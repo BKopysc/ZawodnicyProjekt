@@ -40,32 +40,31 @@ namespace Zawodnicy.WebAPI
             services.AddScoped<ICoachesRepository, CoachesRepository>();
             services.AddScoped<ICoachService, CoachService>();
 
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString("SkiJumperConnectionString")));
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    options.SaveToken = true;
-                    options.RequireHttpsMetadata = false;
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidAudience = "http://localhost:5000",
-                        ValidIssuer = "http://localhost:5000",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TajneHaslo12341234")),
-                };     
-                });
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = "http://tomaszles.pl",
+                    ValidIssuer = "http://tomaszles.pl",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperTajneHaslo111222")),
+                };
+            });
 
             Console.WriteLine(services);
-
-            services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer(
-                    Configuration.GetConnectionString("SkiJumperConnectionString")));
-                 
-;        }
+            ;        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

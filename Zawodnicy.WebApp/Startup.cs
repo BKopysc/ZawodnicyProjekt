@@ -52,7 +52,7 @@ namespace Zawodnicy.WebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                IdentityModelEventSource.ShowPII = true;
+                //IdentityModelEventSource.ShowPII = true;
             }
             else
             {
@@ -81,34 +81,9 @@ namespace Zawodnicy.WebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //CreateRoles(serviceProvider).Wait();
 
         }
 
-        //public async Task CreateRoles(IServiceProvider serviceProvider)
-        //{
-        //    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        //    var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-        //    string[] roleNames = { "zarzadca", "wazny"};
 
-        //    IdentityResult roleResult;
-
-        //    foreach (var roleName in roleNames)
-        //    {
-        //        var roleExist = await RoleManager.RoleExistsAsync(roleName);
-        //        if (!roleExist)
-        //        {
-        //            roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
-        //        }
-        //    }
-
-        //        var waznyUser = UserManager.GetUserAsync()
-        //        {
-        //            //here we tie the new user to the role
-        //            await UserManager.AddToRoleAsync(poweruser, "Admin");
-
-        //        }
-        //    }
-        //}
     }
 }

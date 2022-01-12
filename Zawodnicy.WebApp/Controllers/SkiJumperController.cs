@@ -61,25 +61,45 @@ namespace Zawodnicy.WebApp.Controllers
             }
             return View(skiJumpersList);
         }
-
         private string GenerateJSONWebToken()
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TajneHaslo12341234"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperTajneHaslo111222"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[] {
-                new Claim("Name", "Adam"),
-                new Claim(JwtRegisteredClaimNames.Email,"    "),
+            var claims = new[]
+            {
+                new Claim("Name", "Bartlomiej")
             };
 
             var token = new JwtSecurityToken(
-                issuer: "http://localhost:5000",
-                audience: "http://localhost:5000",
+                issuer: "http://tomaszles.pl",
+                audience: "http://tomaszles.pl",
                 expires: DateTime.Now.AddHours(3),
-                signingCredentials: credentials
-                );
+                signingCredentials: credentials,
+                claims: claims
+            );
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        //private string GenerateJSONWebToken()
+        //{
+        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TajneHaslo12341234"));
+        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        //    var claims = new[] {
+        //        new Claim("Name", "Adam"),
+        //        new Claim(JwtRegisteredClaimNames.Email,"    "),
+        //    };
+
+        //    var token = new JwtSecurityToken(
+        //        issuer: "http://localhost:5000",
+        //        audience: "http://localhost:5000",
+        //        expires: DateTime.Now.AddHours(3),
+        //        signingCredentials: credentials
+        //        );
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
 
         public async Task<IActionResult> Edit(int id)
         {

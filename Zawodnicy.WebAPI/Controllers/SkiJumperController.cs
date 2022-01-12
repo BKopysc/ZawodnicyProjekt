@@ -10,8 +10,8 @@ using Zawodnicy.Infrastructure.Services;
 
 namespace Zawodnicy.WebAPI.Controllers
 {
-    [Authorize]
     [Route("[Controller]")]
+    [Authorize]
     public class SkiJumperController : Controller
     {
         private readonly ISkiJumperService _skiJumperService;
