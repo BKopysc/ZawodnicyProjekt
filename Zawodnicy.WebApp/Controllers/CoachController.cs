@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -13,7 +14,7 @@ namespace Zawodnicy.WebApp.Controllers
 {
     public class CoachController : Controller
     {
-
+        
         public IConfiguration Configuration;
 
         public CoachController(IConfiguration configuration)

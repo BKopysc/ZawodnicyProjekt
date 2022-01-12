@@ -66,28 +66,31 @@
                         }
                     </ul>
                 </div>
+                @* Elementy po prawej stronie w NavBarze*@
                 <div class="navbar-collapse collapse order-3">
                     <ul class="navbar-nav ml-auto">
-                        @{ 
+                        @{
                             if (SignInManager.IsSignedIn(User))
                             {
-                        <li class="nav-item">
-                            Witaj @User.Identity.Name
-                        </li>
-                        <li class="nav-item">
-                            Wyloguj
-                        </li>
+                                <li class="nav-link text-dark">
+                                     <span style="font-weight:bold">@User.Identity.Name</span>
+                                </li>
+                                <li class="nav-link">
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
+                                    </form>
+                                </li>
                             }
                             else
                             {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Zarejestruj</a>
-                        </li>
-                                }
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Zarejestruj</a>
+                                </li>
                             }
+                        }
                     </ul>
                 </div>
             </div>

@@ -3,19 +3,21 @@
 }
 
 
+@*Wyświetlenie komunikatu o powodzeniu rejestracji*@
 @if (TempData["RegisterMessage"] != null)
 {
     @if (TempData["RegisterMessage"].ToString().Equals("Success"))
     {
-        <div class="alert alert-success" role="alert">
-            Poprawnie zarejestrowano! Teraz zaloguj się!
-        </div>
+<div class="alert alert-success" role="alert">
+    Poprawnie zarejestrowano! Teraz <a asp-area="" asp-controller="Account" asp-action="Login" class="alert-link">zaloguj się!</a>
+</div>
     }
 }
 
+@*Powitanie na stronie głównej*@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Zapoznaj się z możliwościami aplikacji.</p>
 </div>
 
 

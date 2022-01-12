@@ -14,6 +14,9 @@ using Zawodnicy.Core.Repository;
 using Zawodnicy.Infrastructure.Repositories;
 using Zawodnicy.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Zawodnicy.WebAPI
 {
@@ -37,7 +40,26 @@ namespace Zawodnicy.WebAPI
             services.AddScoped<ICoachesRepository, CoachesRepository>();
             services.AddScoped<ICoachService, CoachService>();
 
-            
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudience = "http://localhost:5000",
+                        ValidIssuer = "http://localhost:5000",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TajneHaslo12341234")),
+                };     
+                });
+
+            Console.WriteLine(services);
 
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(
@@ -57,6 +79,7 @@ namespace Zawodnicy.WebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
